@@ -1,9 +1,5 @@
 import {
-    generateBls12381G2KeyPair,
-    blsSign,
-    blsVerify,
     blsCreateProof,
-    blsVerifyProof,
   } from "@mattrglobal/bbs-signatures";
 
 async function createBbsProof(
