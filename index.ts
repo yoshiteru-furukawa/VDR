@@ -27,7 +27,8 @@ app.post('/create_vp', async function(req, res) {
     const proof = await createBbsProof(
         req.body.signature,
         req.body.publicKey,
-        req.body.VC
+        req.body.revealed,
+        req.body.messages,
     );
 
     res.json({

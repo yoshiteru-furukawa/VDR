@@ -3,22 +3,23 @@ import {
   } from "@mattrglobal/bbs-signatures";
 
 async function createBbsProof(
-  // VCからsignature取得？
     signature: Uint8Array,
     publicKey: Uint8Array,
-    VC: object) : Promise<Uint8Array>{
+    revealed: number[],
+    messages: string[]) : Promise<Uint8Array>{
       
     //Derive a proof from the signature revealing the first message
-    const messages = [
-      Uint8Array.from(Buffer.from(JSON.stringify(VC), "utf-8")),
-    ]
+    const messages_ = [];
+    for (const message of messages) {
+      messages_.push(Uint8Array.from(Buffer.from(JSON.stringify(message), "utf-8")));
+    }
     //Derive a proof from the signature revealing the first message
     const proof = await blsCreateProof({
       signature,
       publicKey: publicKey,
-      messages,
+      messages: messages_,
       nonce: Uint8Array.from(Buffer.from("nonce", "utf8")),
-      revealed: [0],
+      revealed: revealed,
     });
     return proof;
   
