@@ -1,28 +1,29 @@
-import {
-    blsCreateProof,
-  } from "@mattrglobal/bbs-signatures";
+import {blsCreateProof} from "@mattrglobal/bbs-signatures";
+import { base64Encode, base64Decode, stringToBytes } from "./utility";
+  
 
 async function createBbsProof(
-    signature: Uint8Array,
-    publicKey: Uint8Array,
+    signature: string,
+    publicKey: string,
     messages: string[],
     revealed: number[],
-    nonce: Uint8Array) : Promise<Uint8Array>{
+    nonce: string) : Promise<string>{
       
     //Derive a proof from the signature revealing the first message
     const messages_ = [];
     for (const message of messages) {
-      messages_.push(Uint8Array.from(Buffer.from(JSON.stringify(message), "utf-8")));
+      messages_.push(Uint8Array.from(Buffer.from(message, "utf-8")));
     }
+
     //Derive a proof from the signature revealing the first message
     const proof = await blsCreateProof({
-      signature,
-      publicKey: publicKey,
+      signature: base64Decode(signature),
+      publicKey: base64Decode(publicKey),
       messages: messages_,
-      nonce: nonce,
+      nonce: stringToBytes(nonce),
       revealed: revealed,
     });
-    return proof;
+    return base64Encode(proof);
   
 }
 
