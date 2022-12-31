@@ -1,4 +1,5 @@
 import express from 'express'
+import createBbsKeyPair from './createBbsKeyPair';
 import createBbsProof from './createBbsProof';
 
 const app: express.Express = express()
@@ -13,8 +14,8 @@ app.use((req: express.Request, res: express.Response, next: express.NextFunction
     next();
 })
 
-app.listen(3000, () => {
-    console.log("Start on port 3000.")
+app.listen(8000, () => {
+    console.log("Start on port 8000.")
 })
 
 
@@ -34,5 +35,19 @@ app.post('/create_vp', async function(req, res) {
 
     res.json({
         "proof": proof
+    });
+})
+
+
+// input  : signature
+//        : publickey
+//        : VC
+//
+// output : proof
+app.get('/create_key_pair', async function(req, res) {
+    const keyPair = await createBbsKeyPair();
+
+    res.json({
+        "keyPair": keyPair,
     });
 })
