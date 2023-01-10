@@ -1,4 +1,5 @@
 import express from 'express'
+import getBlsVerifiedResult from './blsVerify';
 import createBbsKeyPair from './createBbsKeyPair';
 import createBbsProof from './createBbsProof';
 
@@ -51,3 +52,21 @@ app.get('/create_key_pair', async function(req, res) {
         "keyPair": keyPair,
     });
 })
+
+// input  : signature
+//        : publickey
+//        : VC
+//
+// output : proof
+app.get('/bls_verify', async function(req, res) {
+    const is_verified = await getBlsVerifiedResult(
+        req.body.signature,
+        req.body.publicKey,
+        req.body.messages
+    );
+
+    res.json({
+        "is_verified": is_verified
+    });
+})
+
