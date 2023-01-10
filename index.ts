@@ -58,7 +58,7 @@ app.get('/create_key_pair', async function(req, res) {
 //        : VC
 //
 // output : proof
-app.get('/bls_verify', async function(req, res) {
+app.post('/bls_verify', async function(req, res) {
     const is_verified = await getBlsVerifiedResult(
         req.body.signature,
         req.body.publicKey,
