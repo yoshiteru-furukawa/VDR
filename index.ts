@@ -1,12 +1,12 @@
 import express from 'express'
-import db from './database';
-import { createDidQuery, createKeyQuery, retrieveKeyQuery } from './queryString';
+import db from './lib/database';
+import { createDidQuery, createKeyQuery, retrieveKeyQuery } from './lib/queryString';
 
 const app: express.Express = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-//CORS対応（本番環境では見直し）
+//CORS対応
 app.use((req: express.Request, res: express.Response, next: express.NextFunction) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "*")
