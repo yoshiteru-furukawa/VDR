@@ -1,4 +1,4 @@
-import { getKeyString, StringObject } from "./jwk";
+import {Jwk } from "./jwk";
 
 /**
  *  input: did: String
@@ -17,8 +17,8 @@ export function createDidQuery(did: String){
  * 
  *  output: query
  */
-export function createKeyQuery(jwk: StringObject, kid: String){
-    const sql = `insert into publicKey VALUES ('${JSON.stringify(jwk)}', '${kid}', '${getKeyString(jwk)}')`;
+export function createKeyQuery(jwk: {[field: string]: any}, kid: String){
+    const sql = `insert into publicKey VALUES ('${JSON.stringify(jwk)}', '${kid}', '---')`;
     return sql;
 }
 
@@ -29,6 +29,5 @@ export function createKeyQuery(jwk: StringObject, kid: String){
  */
 export function retrieveKeyQuery(kid: String){
     const sql = `select * from publicKey where kid='${kid}'`;
-    const sql1 = `select * from publicKey`;
     return sql;
 }
