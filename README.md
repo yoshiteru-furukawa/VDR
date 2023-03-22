@@ -11,11 +11,20 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages).
 -->
 
+# How to start
+This repository is implemented using Express with typescript
+```
+cd VCS
+npx ts-node index.ts
+```
+You can use other tools such as pm2.
+
+
 ## Create DID
 
 ```
 URL
-http://35.86.230.210:8000/create_did
+http://your_domain:8000/create_did
 
 POST Method
 
@@ -59,7 +68,7 @@ OUTPUT:
 
 ```
 URL
-http://35.86.230.210:8000/retrieve_key
+http://your_domain:8000/retrieve_key
 
 POST Method
 
