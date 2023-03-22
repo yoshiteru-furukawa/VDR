@@ -14,7 +14,7 @@ and the Flutter guide for
 # How to start
 This repository is implemented using Express with typescript
 ```
-cd VCS
+cd VDR
 npx ts-node index.ts
 ```
 You can use other tools such as pm2.
